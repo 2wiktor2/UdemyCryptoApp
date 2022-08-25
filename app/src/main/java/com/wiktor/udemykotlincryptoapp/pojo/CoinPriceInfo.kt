@@ -1,13 +1,17 @@
 package com.wiktor.udemykotlincryptoapp.pojo
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
-    @SerializedName("FROMSYMBOL") var FROMSYMBOL: String? = null,
-    @SerializedName("TOSYMBOL") var TOSYMBOL: String? = null,
+    @PrimaryKey
+    @SerializedName("FROMSYMBOL") var fromSymbol: String? = null,
+    @SerializedName("TOSYMBOL") var toSymbol: String? = null,
     @SerializedName("MARKET") var MARKET: String? = null,
     @SerializedName("PRICE") var PRICE: String? = null,
-    @SerializedName("LASTUPDATE") var LASTUPDATE: String? = null,
+    @SerializedName("LASTUPDATE") var lastUpdate: String? = null,
     @SerializedName("LASTVOLUME") var LASTVOLUME: String? = null,
     @SerializedName("LASTVOLUMETO") var LASTVOLUMETO: String? = null,
     @SerializedName("LASTTRADEID") var LASTTRADEID: String? = null,

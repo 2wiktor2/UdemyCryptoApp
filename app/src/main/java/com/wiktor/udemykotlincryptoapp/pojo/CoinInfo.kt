@@ -1,20 +1,10 @@
 package com.wiktor.udemykotlincryptoapp.pojo
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-
+@Entity
 data class CoinInfo(
-
-    @SerializedName("Id")
-    var id: String? = null,
-
     @SerializedName("Name")
-    var name: String? = null,
-
-    @SerializedName("FullName")
-    var fullName: String? = null,
-
-    @SerializedName("ImageUrl")
-    var imageUrl: String? = null
-
+    var name: String? = null
 )
