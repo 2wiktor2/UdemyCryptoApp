@@ -1,6 +1,7 @@
 package com.wiktor.udemykotlincryptoapp.api
 
 import com.wiktor.udemykotlincryptoapp.pojo.CoinInfoListOfData
+import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfoRawData
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -29,7 +30,7 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey: String = "",
         @Query(QUERY_PARAM_FROM_SYMBOLS) fSyms: String,
         @Query(QUERY_PARAM_TO_SYMBOLS) tSyms: String = CURRENCY,
-    ): Single<CoinInfoListOfData>
+    ): Single<CoinPriceInfoRawData>
 
     //Константы. Выносим в companion object
     companion object {

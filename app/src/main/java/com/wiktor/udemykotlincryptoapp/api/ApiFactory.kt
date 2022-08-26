@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // Аналог синглтона
 object ApiFactory {
-
     //https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD
     private const val BASE_URL = " https://min-api.cryptocompare.com/data/"
 

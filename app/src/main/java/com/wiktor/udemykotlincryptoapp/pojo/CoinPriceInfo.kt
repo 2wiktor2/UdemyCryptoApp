@@ -2,55 +2,128 @@ package com.wiktor.udemykotlincryptoapp.pojo
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
+    @SerializedName("TYPE")
+    @Expose
+    val type: String?,
+    @SerializedName("MARKET")
+    @Expose
+    val market: String?,
     @PrimaryKey
-    @SerializedName("FROMSYMBOL") var fromSymbol: String? = null,
-    @SerializedName("TOSYMBOL") var toSymbol: String? = null,
-    @SerializedName("MARKET") var MARKET: String? = null,
-    @SerializedName("PRICE") var PRICE: String? = null,
-    @SerializedName("LASTUPDATE") var lastUpdate: String? = null,
-    @SerializedName("LASTVOLUME") var LASTVOLUME: String? = null,
-    @SerializedName("LASTVOLUMETO") var LASTVOLUMETO: String? = null,
-    @SerializedName("LASTTRADEID") var LASTTRADEID: String? = null,
-    @SerializedName("VOLUMEDAY") var VOLUMEDAY: String? = null,
-    @SerializedName("VOLUMEDAYTO") var VOLUMEDAYTO: String? = null,
-    @SerializedName("VOLUME24HOUR") var VOLUME24HOUR: String? = null,
-    @SerializedName("VOLUME24HOURTO") var VOLUME24HOURTO: String? = null,
-    @SerializedName("OPENDAY") var OPENDAY: String? = null,
-    @SerializedName("HIGHDAY") var HIGHDAY: String? = null,
-    @SerializedName("LOWDAY") var LOWDAY: String? = null,
-    @SerializedName("OPEN24HOUR") var OPEN24HOUR: String? = null,
-    @SerializedName("HIGH24HOUR") var HIGH24HOUR: String? = null,
-    @SerializedName("LOW24HOUR") var LOW24HOUR: String? = null,
-    @SerializedName("LASTMARKET") var LASTMARKET: String? = null,
-    @SerializedName("VOLUMEHOUR") var VOLUMEHOUR: String? = null,
-    @SerializedName("VOLUMEHOURTO") var VOLUMEHOURTO: String? = null,
-    @SerializedName("OPENHOUR") var OPENHOUR: String? = null,
-    @SerializedName("HIGHHOUR") var HIGHHOUR: String? = null,
-    @SerializedName("LOWHOUR") var LOWHOUR: String? = null,
-    @SerializedName("TOPTIERVOLUME24HOUR") var TOPTIERVOLUME24HOUR: String? = null,
-    @SerializedName("TOPTIERVOLUME24HOURTO") var TOPTIERVOLUME24HOURTO: String? = null,
-    @SerializedName("CHANGE24HOUR") var CHANGE24HOUR: String? = null,
-    @SerializedName("CHANGEPCT24HOUR") var CHANGEPCT24HOUR: String? = null,
-    @SerializedName("CHANGEDAY") var CHANGEDAY: String? = null,
-    @SerializedName("CHANGEPCTDAY") var CHANGEPCTDAY: String? = null,
-    @SerializedName("CHANGEHOUR") var CHANGEHOUR: String? = null,
-    @SerializedName("CHANGEPCTHOUR") var CHANGEPCTHOUR: String? = null,
-    @SerializedName("CONVERSIONTYPE") var CONVERSIONTYPE: String? = null,
-    @SerializedName("CONVERSIONSYMBOL") var CONVERSIONSYMBOL: String? = null,
-    @SerializedName("SUPPLY") var SUPPLY: String? = null,
-    @SerializedName("MKTCAP") var MKTCAP: String? = null,
-    @SerializedName("MKTCAPPENALTY") var MKTCAPPENALTY: String? = null,
-    @SerializedName("CIRCULATINGSUPPLY") var CIRCULATINGSUPPLY: String? = null,
-    @SerializedName("CIRCULATINGSUPPLYMKTCAP") var CIRCULATINGSUPPLYMKTCAP: String? = null,
-    @SerializedName("TOTALVOLUME24H") var TOTALVOLUME24H: String? = null,
-    @SerializedName("TOTALVOLUME24HTO") var TOTALVOLUME24HTO: String? = null,
-    @SerializedName("TOTALTOPTIERVOLUME24H") var TOTALTOPTIERVOLUME24H: String? = null,
-    @SerializedName("TOTALTOPTIERVOLUME24HTO") var TOTALTOPTIERVOLUME24HTO: String? = null,
-    @SerializedName("IMAGEURL") var IMAGEURL: String? = null,
-
-    )
+    @SerializedName("FROMSYMBOL")
+    @Expose
+    val fromSymbol: String,
+    @SerializedName("TOSYMBOL")
+    @Expose
+    val toSymbol: String?,
+    @SerializedName("FLAGS")
+    @Expose
+    val flags: String?,
+    @SerializedName("PRICE")
+    @Expose
+    val price: String?,
+    @SerializedName("LASTUPDATE")
+    @Expose
+    val lastUpdate: Long?,
+    @SerializedName("LASTVOLUME")
+    @Expose
+    val lastVolume: String?,
+    @SerializedName("LASTVOLUMETO")
+    @Expose
+    val lastVolumeTo: String?,
+    @SerializedName("LASTTRADEID")
+    @Expose
+    val lastTradeId: String?,
+    @SerializedName("VOLUMEDAY")
+    @Expose
+    val volumeDay: String?,
+    @SerializedName("VOLUMEDAYTO")
+    @Expose
+    val volumeDayTo: String?,
+    @SerializedName("VOLUME24HOUR")
+    @Expose
+    val volume24Hour: String?,
+    @SerializedName("VOLUME24HOURTO")
+    @Expose
+    val volume24HourTo: String?,
+    @SerializedName("OPENDAY")
+    @Expose
+    val openDay: String?,
+    @SerializedName("HIGHDAY")
+    @Expose
+    val highDay: String?,
+    @SerializedName("LOWDAY")
+    @Expose
+    val lowDay: String?,
+    @SerializedName("OPEN24HOUR")
+    @Expose
+    val open24Hour: String?,
+    @SerializedName("HIGH24HOUR")
+    @Expose
+    val high24Hour: String?,
+    @SerializedName("LOW24HOUR")
+    @Expose
+    val low24Hour: String?,
+    @SerializedName("LASTMARKET")
+    @Expose
+    val lastMarket: String?,
+    @SerializedName("VOLUMEHOUR")
+    @Expose
+    val volumeHour: String?,
+    @SerializedName("VOLUMEHOURTO")
+    @Expose
+    val volumeHourTo: String?,
+    @SerializedName("OPENHOUR")
+    @Expose
+    val openHour: String?,
+    @SerializedName("HIGHHOUR")
+    @Expose
+    val highHour: String?,
+    @SerializedName("LOWHOUR")
+    @Expose
+    val lowHour: String?,
+    @SerializedName("TOPTIERVOLUME24HOUR")
+    @Expose
+    val topTierVolume24Hour: String?,
+    @SerializedName("TOPTIERVOLUME24HOURTO")
+    @Expose
+    val topTierVolume24HourTo: String?,
+    @SerializedName("CHANGE24HOUR")
+    @Expose
+    val change24Hour: String?,
+    @SerializedName("CHANGEPCT24HOUR")
+    @Expose
+    val changePCT24Hour: String?,
+    @SerializedName("CHANGEDAY")
+    @Expose
+    val changeDay: String?,
+    @SerializedName("CHANGEPCTDAY")
+    @Expose
+    val changePCTDay: String?,
+    @SerializedName("SUPPLY")
+    @Expose
+    val supply: String?,
+    @SerializedName("MKTCAP")
+    @Expose
+    val mktCap: String?,
+    @SerializedName("TOTALVOLUME24H")
+    @Expose
+    val totalVolume24Hour: String?,
+    @SerializedName("TOTALVOLUME24HTO")
+    @Expose
+    val totalVolume24HourTo: String?,
+    @SerializedName("TOTALTOPTIERVOLUME24H")
+    @Expose
+    val totalTopTierVolume24Hour: String?,
+    @SerializedName("TOTALTOPTIERVOLUME24HTO")
+    @Expose
+    val totalTopTierVolume24HourTo: String?,
+    @SerializedName("IMAGEURL")
+    @Expose
+    val imageUrl: String?
+)
 
