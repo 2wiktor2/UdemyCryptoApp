@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.wiktor.udemykotlincryptoapp.api.ApiFactory
-import com.wiktor.udemykotlincryptoapp.utils.convertTimestampToTime
+import com.wiktor.udemykotlincryptoapp.utils.MyTimeConverter
 
 @Entity(tableName = "full_price_list")
 data class CoinPriceInfo(
@@ -129,7 +129,8 @@ data class CoinPriceInfo(
     val imageUrl: String?,
 ) {
     fun getFormattedTime(): String {
-        return convertTimestampToTime(lastUpdate)
+        val myTimeConverter = MyTimeConverter()
+        return myTimeConverter.convertTimeStampToTime(lastUpdate)
     }
 
     fun getFullImageUrl(): String {

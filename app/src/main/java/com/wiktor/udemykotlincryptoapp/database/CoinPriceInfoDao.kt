@@ -10,7 +10,7 @@ import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
 @Dao
 interface CoinPriceInfoDao {
     //выводит список валют в recyclerView
-    @Query("SELECT * FROM full_price_list ORDER BY lastUpdate")
+    @Query("SELECT * FROM full_price_list ORDER BY lastUpdate DESC")
     fun getPriceList(): LiveData<List<CoinPriceInfo>>
 
     //Детальная информация для отдельного экрана
