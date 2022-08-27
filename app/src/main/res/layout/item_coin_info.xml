@@ -12,11 +12,11 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/ic_launcher_background"
             android:id="@+id/imageView_logo_coin"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="4dp"
+            android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +48,7 @@
             tools:text="7000.89" />
 
         <TextView
-            android:id="@+id/textView_time"
+            android:id="@+id/textView_last_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
