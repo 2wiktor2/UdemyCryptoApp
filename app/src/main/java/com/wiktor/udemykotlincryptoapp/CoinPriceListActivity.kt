@@ -1,7 +1,6 @@
 package com.wiktor.udemykotlincryptoapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,9 +20,20 @@ class CoinPriceListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_coin_price_list)
 
         val adapter = CoinInfoAdapter(this)
-        adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener{
+        adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
-            Log.d("qwertyu", coinPriceInfo.fromSymbol)
+//            Log.d("qwertyu", coinPriceInfo.fromSymbol)
+
+                // Старый способ запуска активити
+/*                val intent = Intent(this@CoinPriceListActivity, ActivityCoinDetail::class.java)
+                intent.putExtra(ActivityCoinDetail.EXTRA_FROM_SYMBOL, coinPriceInfo.fromSymbol)
+                startActivity(intent)*/
+
+                // Новый способ запуска активити
+                val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
+                    coinPriceInfo.fromSymbol)
+                startActivity(intent)
+
             }
 
         }
