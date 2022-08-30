@@ -1,4 +1,4 @@
-package com.wiktor.udemykotlincryptoapp.adapters
+package com.wiktor.udemykotlincryptoapp.presentation.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
+import com.wiktor.udemykotlincryptoapp.data.model.CoinPriceInfo
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {

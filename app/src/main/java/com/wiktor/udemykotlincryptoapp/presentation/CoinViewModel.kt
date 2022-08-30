@@ -1,14 +1,14 @@
-package com.wiktor.udemykotlincryptoapp
+package com.wiktor.udemykotlincryptoapp.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.google.gson.Gson
-import com.wiktor.udemykotlincryptoapp.api.ApiFactory
-import com.wiktor.udemykotlincryptoapp.database.AppDatabase
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfoRawData
+import com.wiktor.udemykotlincryptoapp.data.network.ApiFactory
+import com.wiktor.udemykotlincryptoapp.data.database.AppDatabase
+import com.wiktor.udemykotlincryptoapp.data.model.CoinPriceInfo
+import com.wiktor.udemykotlincryptoapp.data.model.CoinPriceInfoRawData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit

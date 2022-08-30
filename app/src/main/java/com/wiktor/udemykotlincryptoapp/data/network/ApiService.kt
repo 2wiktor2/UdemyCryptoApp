@@ -1,7 +1,7 @@
-package com.wiktor.udemykotlincryptoapp.api
+package com.wiktor.udemykotlincryptoapp.data.network
 
-import com.wiktor.udemykotlincryptoapp.pojo.CoinInfoListOfData
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfoRawData
+import com.wiktor.udemykotlincryptoapp.data.model.CoinInfoListOfData
+import com.wiktor.udemykotlincryptoapp.data.model.CoinPriceInfoRawData
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

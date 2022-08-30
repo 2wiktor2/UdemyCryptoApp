@@ -1,12 +1,13 @@
-package com.wiktor.udemykotlincryptoapp
+package com.wiktor.udemykotlincryptoapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.wiktor.udemykotlincryptoapp.adapters.CoinInfoAdapter
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
+import com.wiktor.udemykotlincryptoapp.R
+import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
+import com.wiktor.udemykotlincryptoapp.data.model.CoinPriceInfo
 
 
 //https://min-api.cryptocompare.com/

@@ -1,4 +1,4 @@
-package com.wiktor.udemykotlincryptoapp.api
+package com.wiktor.udemykotlincryptoapp.data.network
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
