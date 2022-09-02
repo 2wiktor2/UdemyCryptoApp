@@ -1,4 +1,4 @@
-package com.wiktor.udemykotlincryptoapp.adapters
+package com.wiktor.udemykotlincryptoapp.presentation.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
+import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoDto
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinListInfo: List<CoinPriceInfo> = listOf()
+    var coinListInfo: List<CoinInfoDto> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -55,13 +55,13 @@ class CoinInfoAdapter(private val context: Context) :
 
     inner class CoinInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewLogoCoin: ImageView =
-            itemView.findViewById<ImageView>(R.id.imageView_logo_coin)
-        val textViewSymbols = itemView.findViewById<TextView>(R.id.textView_symbols)
-        val textViewPrice = itemView.findViewById<TextView>(R.id.textView_price)
-        val textViewLastUpdate = itemView.findViewById<TextView>(R.id.textView_last_update)
+            itemView.findViewById(R.id.imageView_logo_coin)
+        val textViewSymbols: TextView = itemView.findViewById(R.id.textView_symbols)
+        val textViewPrice: TextView = itemView.findViewById(R.id.textView_price)
+        val textViewLastUpdate : TextView= itemView.findViewById(R.id.textView_last_update)
     }
 
     interface OnCoinClickListener {
-        fun onCoinClick(coinPriceInfo: CoinPriceInfo)
+        fun onCoinClick(coinPriceInfo: CoinInfoDto)
     }
 }

@@ -1,4 +1,4 @@
-package com.wiktor.udemykotlincryptoapp
+package com.wiktor.udemykotlincryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
+import com.wiktor.udemykotlincryptoapp.R
 
 class ActivityCoinDetail : AppCompatActivity() {
 

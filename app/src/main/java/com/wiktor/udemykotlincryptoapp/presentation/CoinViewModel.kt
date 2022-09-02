@@ -1,14 +1,14 @@
-package com.wiktor.udemykotlincryptoapp
+package com.wiktor.udemykotlincryptoapp.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.google.gson.Gson
-import com.wiktor.udemykotlincryptoapp.api.ApiFactory
-import com.wiktor.udemykotlincryptoapp.database.AppDatabase
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfo
-import com.wiktor.udemykotlincryptoapp.pojo.CoinPriceInfoRawData
+import com.wiktor.udemykotlincryptoapp.data.database.AppDatabase
+import com.wiktor.udemykotlincryptoapp.data.network.ApiFactory
+import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoDto
+import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoJsonContainerDto
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -21,7 +21,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     val priceList = db.coinPriceInfoDao().getPriceList()
 
     //Детальная информация по одной валюте
-    fun getDetailInfo(fSym: String): LiveData<CoinPriceInfo> {
+    fun getDetailInfo(fSym: String): LiveData<CoinInfoDto> {
         return db.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
     }
 
@@ -36,7 +36,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         val disposable = ApiFactory.apiService.getTopCoinInfo(limit = 50)
             //здесь обрабатываем входящий ответ от сервера. Получаем список, обрабатывае его и возвращаем строку.
             // дальше в методе  .subscribe({.... уже работаем с этой строкой
-            .map { it.data?.map { it.coinInfo?.name }?.joinToString(",") }
+            .map { it.names?.map { it.coinInfo?.name }?.joinToString(",") }
             // Метод   .flatMap возмет строку из блока  .map     и пересдаст ее в    .flatMap в виде переменной it
             .flatMap { ApiFactory.apiService.getFullPriceList(fSyms = it) }
             .map { getPriceListFromRawData(it) }
@@ -57,10 +57,10 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun getPriceListFromRawData(
-        coinPriceInfoRawData: CoinPriceInfoRawData,
-    ): List<CoinPriceInfo> {
-        val result = ArrayList<CoinPriceInfo>()
-        val jsonObject = coinPriceInfoRawData.coinPriceInfoJsonObject ?: return result
+        coinPriceInfoRawData: CoinInfoJsonContainerDto,
+    ): List<CoinInfoDto> {
+        val result = ArrayList<CoinInfoDto>()
+        val jsonObject = coinPriceInfoRawData.json ?: return result
         val coinKeySet = jsonObject.keySet()
         for (coinKey in coinKeySet) {
             val currencyJson = jsonObject.getAsJsonObject(coinKey)
@@ -68,7 +68,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             for (currencyKey in currencyKeySet) {
                 val priceInfo = Gson().fromJson(
                     currencyJson.getAsJsonObject(currencyKey),
-                    CoinPriceInfo::class.java
+                    CoinInfoDto::class.java
                 )
                 result.add(priceInfo)
             }
