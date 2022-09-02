@@ -7,4 +7,7 @@ interface CoinRepository {
     fun getCoinInfoList(): LiveData<List<CoinInfo>>
     fun getCoinInfo(fronSymbol: String): LiveData<CoinInfo>
 
+    //Метод загрузки данных из сети
+   suspend fun loadData()
+
 }

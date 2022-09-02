@@ -1,4 +1,4 @@
-package com.wiktor.udemykotlincryptoapp.data.model
+package com.wiktor.udemykotlincryptoapp.data.network.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,7 +8,7 @@ import com.wiktor.udemykotlincryptoapp.data.network.ApiFactory
 import com.wiktor.udemykotlincryptoapp.utils.MyTimeConverter
 
 @Entity(tableName = "full_price_list")
-data class CoinPriceInfo(
+data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String?,
