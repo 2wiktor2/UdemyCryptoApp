@@ -45,16 +45,15 @@ class CoinMapper {
         return namesListDto.names?.map { it.coinInfo?.name }?.joinToString(",") ?: ""
     }
 
-    fun mapDbModelToEntity(dbModel: CoinInfoDbModel): CoinInfo {
-        return CoinInfo(
-            fromSymbol = dbModel.fromSymbol,
-            toSymbol = dbModel.toSymbol,
-            price = dbModel.price,
-            lastUpdate = dbModel.lastUpdate,
-            highDay = dbModel.highDay,
-            lowDay = dbModel.lowDay,
-            lastMarket = dbModel.lastMarket,
-            imageUrl = dbModel.imageUrl
-        )
-    }
+    fun mapDbModelToEntity(dbModel: CoinInfoDbModel) = CoinInfo(
+        fromSymbol = dbModel.fromSymbol,
+        toSymbol = dbModel.toSymbol,
+        price = dbModel.price,
+        lastUpdate = dbModel.lastUpdate,
+        highDay = dbModel.highDay,
+        lowDay = dbModel.lowDay,
+        lastMarket = dbModel.lastMarket,
+        imageUrl = dbModel.imageUrl
+    )
+
 }

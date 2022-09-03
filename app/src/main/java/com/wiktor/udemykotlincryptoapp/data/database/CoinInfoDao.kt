@@ -19,5 +19,5 @@ interface CoinInfoDao {
     //Сохранение, полученных из итернета, данных в базу
     // onConflict = OnConflictStrategy.REPLACE - заменять данные при получении новых данных
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPriceList(priceList: List<CoinInfoDbModel>)
+    suspend fun insertPriceList(priceList: List<CoinInfoDbModel>)
 }

@@ -1,13 +1,15 @@
 package com.wiktor.udemykotlincryptoapp.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoDto
+import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
+import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 
 
 //https://min-api.cryptocompare.com/
@@ -21,8 +23,9 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinInfoDto) {
-//            Log.d("qwertyu", coinPriceInfo.fromSymbol)
+
+            override fun onCoinClick(coinPriceInfo: CoinInfo) {
+                Log.d("qwertyu", coinPriceInfo.fromSymbol)
 
                 // Старый способ запуска активити
 /*                val intent = Intent(this@CoinPriceListActivity, ActivityCoinDetail::class.java)
@@ -33,7 +36,6 @@ class CoinPriceListActivity : AppCompatActivity() {
                 val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
                     coinPriceInfo.fromSymbol)
                 startActivity(intent)
-
             }
 
         }
@@ -42,14 +44,9 @@ class CoinPriceListActivity : AppCompatActivity() {
         recyclerViewCoinPriceList.adapter = adapter
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.priceList.observe(this) {
+        viewModel.coinInfoList.observe(this) {
             // Log.d("qwerty", "Success in activity $it")
             adapter.coinListInfo = it
         }
-
-        viewModel.getDetailInfo("BTC").observe(this, Observer {
-            // Log.d("qwerty", "Success in activity 2 $it")
-        })
-
     }
 }

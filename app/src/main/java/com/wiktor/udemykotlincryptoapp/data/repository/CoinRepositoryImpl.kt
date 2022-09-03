@@ -25,27 +25,30 @@ class CoinRepositoryImpl(private val application: Application) : CoinRepository 
         }
     }
 
-    override fun getCoinInfo(fronSymbol: String): LiveData<CoinInfo> {
-        return Transformations.map(coinInfoDao.getPriceInfoAboutCoin(fronSymbol)) {
+    override fun getCoinInfo(fromSymbol: String): LiveData<CoinInfo> {
+        return Transformations.map(coinInfoDao.getPriceInfoAboutCoin(fromSymbol)) {
             mapper.mapDbModelToEntity(it)
         }
     }
 
+
     override suspend fun loadData() {
         while (true) {
-            //Получаем топ 50 валют
-            val topCoins = apiService.getTopCoinInfo(limit = 50)
-            //Преобразование валют в одну строку
-            val fSims = mapper.mapNamesListToString(topCoins)
-            // По строке fsyms загружаем необходимые данные из сети
-            val jsonContainer = apiService.getFullPriceList(fSyms = fSims)
-            //Преоборазование jsonContainer в коллекцию объектов Dto
-            val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
-            //коллекцию объектов Dto в коллекцию объектов бд
-            val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
-            // Вставка данных в базу
-            coinInfoDao.insertPriceList(dbModelList)
+            try {//Получаем топ 50 валют
+                val topCoins = apiService.getTopCoinInfo(limit = 50)
+                //Преобразование валют в одну строку
+                val fSims = mapper.mapNamesListToString(topCoins)
+                // По строке fsyms загружаем необходимые данные из сети
+                val jsonContainer = apiService.getFullPriceList(fSyms = fSims)
+                //Преоборазование jsonContainer в коллекцию объектов Dto
+                val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)
+                //коллекцию объектов Dto в коллекцию объектов бд
+                val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
+                // Вставка данных в базу
+                coinInfoDao.insertPriceList(dbModelList)
+            } catch (e: Exception) {
+            }
             delay(10000)
         }
     }
-}р
+}
