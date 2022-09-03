@@ -3,11 +3,9 @@ package com.wiktor.udemykotlincryptoapp.presentation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoDto
 import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
 import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 

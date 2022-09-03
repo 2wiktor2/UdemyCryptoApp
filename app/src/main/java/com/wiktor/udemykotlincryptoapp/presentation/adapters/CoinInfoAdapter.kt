@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.data.network.ApiFactory
 import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
-import com.wiktor.udemykotlincryptoapp.utils.MyTimeConverter
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
@@ -21,8 +19,6 @@ class CoinInfoAdapter(private val context: Context) :
             field = value
             notifyDataSetChanged()
         }
-
-    val myTimeConverter = MyTimeConverter()
 
     var onCoinClickListener: OnCoinClickListener? = null
 
@@ -42,10 +38,10 @@ class CoinInfoAdapter(private val context: Context) :
             textViewSymbols.text = String.format(symbolsTemplate, coin.fromSymbol, coin.toSymbol)
             textViewPrice.text = coin.price
             textViewLastUpdate.text = String.format(lastUpdateTemplate,
-                myTimeConverter.convertTimeStampToTime(coin.lastUpdate))
+                coin.lastUpdate)
             Picasso
                 .get()
-                .load(ApiFactory.BASE_IMAGE_URL + coin.imageUrl)
+                .load(coin.imageUrl)
 //                .resize(30, 30)
 //                .centerCrop()
                 .error(R.drawable.ic_launcher_foreground)

@@ -10,13 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.data.network.ApiFactory.BASE_IMAGE_URL
-import com.wiktor.udemykotlincryptoapp.utils.MyTimeConverter
 
 class ActivityCoinDetail : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
-    val myTimeConverter = MyTimeConverter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +36,14 @@ class ActivityCoinDetail : AppCompatActivity() {
             val textViewLasMarket = findViewById<TextView>(R.id.tvLastMarket)
             textViewLasMarket.text = it.lastMarket
             val textViewLastUpdate = findViewById<TextView>(R.id.tvLastUpdate)
-            textViewLastUpdate.text = myTimeConverter.convertTimeStampToTime(it.lastUpdate)
+            textViewLastUpdate.text = it.lastUpdate
 
             val textViewFromSymbol = findViewById<TextView>(R.id.tvFromSymbol)
             textViewFromSymbol.text = it.fromSymbol
             val textViewToSymbol = findViewById<TextView>(R.id.tvToSymbol)
             textViewToSymbol.text = it.toSymbol
             val imageViewLogoCoin = findViewById<ImageView>(R.id.ivLogoCoin)
-            Picasso.get().load(BASE_IMAGE_URL + it.imageUrl).into(imageViewLogoCoin)
+            Picasso.get().load(it.imageUrl).into(imageViewLogoCoin)
 
         })
     }
