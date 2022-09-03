@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.wiktor.udemykotlincryptoapp.R
+import com.wiktor.udemykotlincryptoapp.databinding.ActivityCoinPriceListBinding
 import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
 import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 
@@ -14,10 +13,14 @@ import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
+    private val binding by lazy {
+        ActivityCoinPriceListBinding.inflate(layoutInflater)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coin_price_list)
+        setContentView(binding.root)
 
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
@@ -37,9 +40,7 @@ class CoinPriceListActivity : AppCompatActivity() {
             }
 
         }
-        val recyclerViewCoinPriceList =
-            findViewById<RecyclerView>(R.id.recyclerView_coin_price_list)
-        recyclerViewCoinPriceList.adapter = adapter
+        binding.recyclerViewCoinPriceList.adapter = adapter
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.coinInfoList.observe(this) {
