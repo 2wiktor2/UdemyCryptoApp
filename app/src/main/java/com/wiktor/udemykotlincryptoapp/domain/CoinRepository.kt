@@ -8,6 +8,6 @@ interface CoinRepository {
     fun getCoinInfo(fromSymbol: String): LiveData<CoinInfo>
 
     //Метод загрузки данных из сети
-   suspend fun loadData()
+    fun loadData()
 
 }
