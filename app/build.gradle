@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -40,7 +43,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.6.1'
-
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01")

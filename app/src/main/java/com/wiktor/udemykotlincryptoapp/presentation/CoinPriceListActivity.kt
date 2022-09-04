@@ -3,11 +3,9 @@ package com.wiktor.udemykotlincryptoapp.presentation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.wiktor.udemykotlincryptoapp.R
-import com.wiktor.udemykotlincryptoapp.data.network.model.CoinInfoDto
+import com.wiktor.udemykotlincryptoapp.databinding.ActivityCoinPriceListBinding
 import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
 import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 
@@ -16,10 +14,14 @@ import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
+    private val binding by lazy {
+        ActivityCoinPriceListBinding.inflate(layoutInflater)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coin_price_list)
+        setContentView(binding.root)
 
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
@@ -31,22 +33,42 @@ class CoinPriceListActivity : AppCompatActivity() {
 /*                val intent = Intent(this@CoinPriceListActivity, ActivityCoinDetail::class.java)
                 intent.putExtra(ActivityCoinDetail.EXTRA_FROM_SYMBOL, coinPriceInfo.fromSymbol)
                 startActivity(intent)*/
+                if (isOnePaneMode()) {
+                    launchDetailActivity(coinPriceInfo.fromSymbol)
+                } else {
+                    launchDetailFragment(coinPriceInfo.fromSymbol)
+                }
 
-                // Новый способ запуска активити
-                val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
-                    coinPriceInfo.fromSymbol)
-                startActivity(intent)
             }
 
         }
-        val recyclerViewCoinPriceList =
-            findViewById<RecyclerView>(R.id.recyclerView_coin_price_list)
-        recyclerViewCoinPriceList.adapter = adapter
+        binding.recyclerViewCoinPriceList.adapter = adapter
+        binding.recyclerViewCoinPriceList.itemAnimator = null
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.coinInfoList.observe(this) {
             // Log.d("qwerty", "Success in activity $it")
-            adapter.coinListInfo = it
+            adapter.submitList(it)
         }
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
+
+    //Метод для запуска активити
+    private fun launchDetailActivity(fromSymbol: String) {
+        val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
+            fromSymbol)
+        startActivity(intent)
+    }
+
+    //Метод для запуска фрагмента
+    private fun launchDetailFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
     }
 }
