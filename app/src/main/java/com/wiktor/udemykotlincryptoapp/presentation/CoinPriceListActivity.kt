@@ -41,11 +41,12 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         }
         binding.recyclerViewCoinPriceList.adapter = adapter
+        binding.recyclerViewCoinPriceList.itemAnimator = null
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.coinInfoList.observe(this) {
             // Log.d("qwerty", "Success in activity $it")
-            adapter.coinListInfo = it
+            adapter.submitList(it)
         }
     }
 }
