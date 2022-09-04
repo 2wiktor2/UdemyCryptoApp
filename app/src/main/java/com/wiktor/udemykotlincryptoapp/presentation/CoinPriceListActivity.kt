@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.wiktor.udemykotlincryptoapp.R
 import com.wiktor.udemykotlincryptoapp.databinding.ActivityCoinPriceListBinding
 import com.wiktor.udemykotlincryptoapp.domain.CoinInfo
 import com.wiktor.udemykotlincryptoapp.presentation.adapters.CoinInfoAdapter
@@ -32,11 +33,12 @@ class CoinPriceListActivity : AppCompatActivity() {
 /*                val intent = Intent(this@CoinPriceListActivity, ActivityCoinDetail::class.java)
                 intent.putExtra(ActivityCoinDetail.EXTRA_FROM_SYMBOL, coinPriceInfo.fromSymbol)
                 startActivity(intent)*/
+                if (isOnePaneMode()) {
+                    launchDetailActivity(coinPriceInfo.fromSymbol)
+                } else {
+                    launchDetailFragment(coinPriceInfo.fromSymbol)
+                }
 
-                // Новый способ запуска активити
-                val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
-                    coinPriceInfo.fromSymbol)
-                startActivity(intent)
             }
 
         }
@@ -48,5 +50,25 @@ class CoinPriceListActivity : AppCompatActivity() {
             // Log.d("qwerty", "Success in activity $it")
             adapter.submitList(it)
         }
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
+
+    //Метод для запуска активити
+    private fun launchDetailActivity(fromSymbol: String) {
+        val intent = ActivityCoinDetail.newIntent(this@CoinPriceListActivity,
+            fromSymbol)
+        startActivity(intent)
+    }
+
+    //Метод для запуска фрагмента
+    private fun launchDetailFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
     }
 }
